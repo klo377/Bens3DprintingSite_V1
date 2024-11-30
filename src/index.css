@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --red-glow: #ff0000;
+  --site-bg: #000000;
+}
+
+body {
+  @apply bg-black text-gray-100 font-['Inter'];
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.parallax-container {
+  @apply relative min-h-screen overflow-hidden;
+}
+
+.parallax-background {
+  @apply fixed inset-0 pointer-events-none;
+}
+
+.parallax-content {
+  @apply relative z-10;
+}
+
+.radial-gradient {
+  background: radial-gradient(
+    circle at 50% 150%,
+    var(--red-glow) 0%,
+    rgba(255, 0, 0, 0.2) 30%,
+    transparent 70%
+  );
+}
+
+@layer components {
+  .navbar {
+    @apply fixed top-0 left-0 right-0 z-50 bg-black border-b border-red-900/20
+           transition-all duration-300;
+  }
+
+  .navbar-scrolled {
+    @apply py-2;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-red-600 to-red-700
+           text-white px-6 py-3 rounded-lg 
+           hover:from-red-700 hover:to-red-800
+           transition-all duration-300 
+           hover:shadow-lg hover:shadow-red-500/20
+           transform hover:-translate-y-0.5;
+  }
+
+  .feature-card {
+    @apply relative overflow-hidden rounded-lg transform
+           transition-all duration-500 hover:scale-105
+           bg-black border border-red-900/20;
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
+  }
+
+  .feature-card::before {
+    content: '';
+    @apply absolute -inset-0.5 bg-gradient-to-r from-red-600 to-red-900 
+           rounded-lg blur opacity-50 transition-opacity duration-300;
+    z-index: -1;
+  }
+
+  .feature-card:hover::before {
+    @apply opacity-80;
+  }
+
+  .feature-card-image {
+    @apply w-full h-64 object-cover;
+  }
+
+  .feature-card-content {
+    @apply absolute inset-0 flex flex-col items-center justify-center text-center p-8
+           bg-gradient-to-t from-black via-black/80 to-transparent;
+  }
+
+  .cta-section {
+    @apply relative w-3/5 mx-auto my-24;
+  }
+
+  .cta-section::before {
+    content: '';
+    @apply absolute -inset-4 bg-gradient-to-r from-red-600 to-red-900 
+           rounded-lg blur-xl opacity-70;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .cta-content {
+    @apply relative bg-black rounded-lg p-12 text-center;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
